@@ -14,6 +14,20 @@
             }
         }
 
+        public static void Selection(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int indexOfMin = i;
 
+                for (int j = i; j < arr.Length; j++)
+                {
+                    if (arr[indexOfMin] > arr[j])
+                        indexOfMin = j;
+                }
+
+                Helpers.Swap(ref arr[indexOfMin], ref arr[i]);
+            }
+        }
     }
 }
