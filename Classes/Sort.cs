@@ -46,5 +46,55 @@
                 arr[j + 1] = current;
             }
         }
+
+        public static void Merge(int[] arr)
+            => Merge(arr, 0, arr.Length - 1);
+
+        private static void Merge(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+
+                Merge(arr, left, middle);
+                Merge(arr, middle + 1, right);
+
+                MergeHelper(arr, left, middle, right);
+            }
+        }
+
+        private static void MergeHelper(int[] arr, int left, int middle, int right)
+        {
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+
+            int[] leftArr = new int[n1];
+            int[] rightArr = new int[n2];
+
+            for (int i = 0; i < n1; i++)
+                leftArr[i] = arr[left + i];
+
+            for (int i = 0; i < n2; i++)
+                rightArr[i] = arr[middle + i + 1];
+
+            int x = 0,
+                y = 0,
+                z = left;
+
+            while (x < n1 && y < n2)
+            {
+                if (leftArr[x] <= rightArr[y])
+                    arr[z++] = leftArr[x++];
+
+                else
+                    arr[z++] = rightArr[y++];
+            }
+
+            while (x < n1)
+                arr[z++] = leftArr[x++];
+
+            while (y < n2)
+                arr[z++] = rightArr[y++];
+        }
     }
 }
